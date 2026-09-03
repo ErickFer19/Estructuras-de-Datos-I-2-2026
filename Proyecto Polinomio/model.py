@@ -19,7 +19,7 @@ class Polinomio:
             actual = self.cabeza
             anterior = None
             while actual is not None:
-                if actual.exponente == exponente and actual.variable == variable:
+                if actual.exponente == exponente and actual.variable == variable or exponente == 0 and actual.exponente ==0:
                     # 1. Calcular el valor real con signo del término actual
                     val_actual = -actual.coeficiente if actual.signo == "-" else actual.coeficiente
                     
@@ -29,7 +29,13 @@ class Polinomio:
                     # 3. Sumar algebraicamente
                     total = val_actual + val_nuevo
                     
-                    # 4. Actualizar el nodo existente con el nuevo signo y valor absoluto
+                    if total == 0:
+                        if actual == self.cabeza:
+                            self.cabeza = self.cabeza.siguiente
+                            return
+                        else:
+                            anterior.siguiente = actual.siguiente
+                            return
                     actual.signo = "-" if total < 0 else "+"
                     actual.coeficiente = abs(total)
                     return
@@ -39,9 +45,8 @@ class Polinomio:
             nuevo_polinomio.siguiente = None
 
 
-    def eliminar_termino(self, exponente):
+    def eliminar_termino_por_exponente(self, exponente):
         if self.cabeza is None:
-            print("No existen terminos a eliminar")
             return
         if self.cabeza.exponente == exponente:
             self.cabeza = self.cabeza.siguiente
@@ -55,7 +60,10 @@ class Polinomio:
             else:
                 anterior= actual
                 actual = actual.siguiente
-            print("No hay terminos con ese exponente")      
+
+        print("No hay terminos con ese exponente")   
+        
+        
 
     def obtener_representacion(self):
         """Método nuevo para transformar la lista enlazada en un String para la Vista"""
@@ -66,11 +74,19 @@ class Polinomio:
         actual = self.cabeza
         while actual is not None:
             # Construimos cada término (ej: + 3 x^2)
-            termino_str = f"{actual.signo} {actual.coeficiente}{actual.variable}^{actual.exponente}"
-            elementos.append(termino_str)
+            if actual.exponente == 0:
+                termino_str = f"{actual.signo} {actual.coeficiente}"
+                elementos.append(termino_str)
+            else:
+                termino_str = f"{actual.signo} {actual.coeficiente}{actual.variable}^{actual.exponente}"
+                elementos.append(termino_str)
             actual = actual.siguiente
             
         return " ".join(elementos)              
+
+
+    def ordenar_polinomio(self):
+        pass
 
 
 

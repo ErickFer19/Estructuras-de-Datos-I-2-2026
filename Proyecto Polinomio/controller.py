@@ -5,6 +5,7 @@ class ControladorPolinomio:
         
         # Conectamos el botón de la Vista con la función del Controlador
         self.vista.configurar_comando_boton(self.manejar_agregar_termino)
+        self.vista.configurar_comando_eliminar(self.manejar_eliminar_termino)
 
     def manejar_agregar_termino(self):
         datos = self.vista.obtener_datos()
@@ -29,3 +30,20 @@ class ControladorPolinomio:
             
         except ValueError:
             self.vista.mostrar_polinomio("Error: Coeficiente y Exponente deben ser numéricos.")
+
+    def manejar_eliminar_termino(self):
+        datos = self.vista.obtener_datos()
+
+        exp = datos["exponente"]        
+
+        if not exp:
+            return
+
+        try:
+            exp_num = int(exp)
+            self.modelo.eliminar_termino_por_exponente(exp_num)
+            polinomio_texto = self.modelo.obtener_representacion()
+
+            self.vista.mostrar_polinomio(polinomio_texto)
+        except ValueError:
+            self.vista.mostrar_polinomio("Error: No existe terminos con ese exponente")

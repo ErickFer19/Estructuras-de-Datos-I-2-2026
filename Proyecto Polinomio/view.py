@@ -51,8 +51,12 @@ class VistaPolinomio(tk.Frame):
         tk.Label(f_signo, text="signo").pack()
 
         # Botón central
-        self.btn_accion = tk.Button(self, text="Button", width=12)
+        self.btn_accion = tk.Button(self, text="Agregar", width=12)
         self.btn_accion.pack(pady=10)
+
+        #Boton Eliminar
+        self.btn_eliminar = tk.Button(self, text="Eliminar", width=12)
+        self.btn_eliminar.pack(pady=15)
 
         # Área de visualización inferior (Caja de texto para mostrar polinomios)
         self.text_display = tk.Text(self, height=3, width=50, font=("Arial", 12))
@@ -76,3 +80,6 @@ class VistaPolinomio(tk.Frame):
     def configurar_comando_boton(self, callback):
         """Permite al Controlador asignarle una función (evento) al botón."""
         self.btn_accion.config(command=callback)
+
+    def configurar_comando_eliminar(self, callback):
+        self.btn_eliminar.config(command=callback)    
