@@ -10,7 +10,6 @@ class VistaPolinomio(tk.Frame):
         self.master = master
         self.pack(fill=tk.BOTH, expand=True)
         
-        # Inicializar los componentes de la interfaz
         self._crear_widgets()
 
     def _crear_widgets(self):
@@ -50,7 +49,7 @@ class VistaPolinomio(tk.Frame):
         self.entry_signo.pack()
         tk.Label(f_signo, text="signo").pack()
 
-        # Botón central
+        # Botón Agregar
         self.btn_accion = tk.Button(self, text="Agregar", width=12)
         self.btn_accion.pack(pady=10)
 
@@ -62,7 +61,7 @@ class VistaPolinomio(tk.Frame):
         self.text_display = tk.Text(self, height=3, width=50, font=("Arial", 12))
         self.text_display.pack(pady=10)
 
-    # --- Métodos de utilidad para que el Controlador interactúe con la Vista ---
+
     def obtener_datos(self):
         """Retorna un diccionario con los valores actuales de los campos de entrada."""
         return {

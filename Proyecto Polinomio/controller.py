@@ -22,7 +22,6 @@ class ControladorPolinomio:
             coef_num = float(coef) if '.' in coef else int(coef)
             exp_num = int(exp)
             
-            # Usamos el modelo pasado por parámetro
             self.modelo.agregar_termino(coef_num, exp_num, var, signo)
             polinomio_texto = self.modelo.obtener_representacion()
             

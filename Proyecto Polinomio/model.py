@@ -20,15 +20,9 @@ class Polinomio:
             anterior = None
             while actual is not None:
                 if actual.exponente == exponente and actual.variable == variable or exponente == 0 and actual.exponente ==0:
-                    # 1. Calcular el valor real con signo del término actual
                     val_actual = -actual.coeficiente if actual.signo == "-" else actual.coeficiente
-                    
-                    # 2. Calcular el valor real con signo del nuevo término
                     val_nuevo = -nuevo_polinomio.coeficiente if signo == "-" else nuevo_polinomio.coeficiente
-                    
-                    # 3. Sumar algebraicamente
                     total = val_actual + val_nuevo
-                    
                     if total == 0:
                         if actual == self.cabeza:
                             self.cabeza = self.cabeza.siguiente
@@ -73,7 +67,6 @@ class Polinomio:
         elementos = []
         actual = self.cabeza
         while actual is not None:
-            # Construimos cada término (ej: + 3 x^2)
             if actual.exponente == 0:
                 termino_str = f"{actual.signo} {actual.coeficiente}"
                 elementos.append(termino_str)
@@ -84,9 +77,6 @@ class Polinomio:
             
         return " ".join(elementos)              
 
-
-    def ordenar_polinomio(self):
-        pass
 
 
 
