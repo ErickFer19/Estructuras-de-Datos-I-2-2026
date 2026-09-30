@@ -7,19 +7,31 @@ class Nodo:
 class LinkedList:
     def __init__(self):
         self.cabeza = None
+        self.max = 3
 
+
+    def conteo(self):
+        curr = self.cabeza
+        total = 0
+        while curr is not None:
+            total += 1
+            curr = curr.siguiente
+        return total    
 
 
     def insertar_ultimo(self, valor):
-        new_node = Nodo(valor)
-        if self.cabeza == None:
-            self.cabeza = new_node
-            return
-        curr = self.cabeza
-        while curr.siguiente is not None:
-            curr = curr.siguiente
-        curr.siguiente = new_node
-        new_node.siguiente = None
+        if self.conteo() < self.max:
+            new_node = Nodo(valor)
+            if self.cabeza == None:
+                self.cabeza = new_node
+                return
+            curr = self.cabeza
+            while curr.siguiente is not None:
+                curr = curr.siguiente
+            curr.siguiente = new_node
+            new_node.siguiente = None
+        else:
+            print("No puede insertar mas elementos")
 
     def insertar_inicio(self, valor):
         new_node= Nodo(valor)
@@ -64,6 +76,22 @@ class LinkedList:
             return
         self.cabeza = self.cabeza.siguiente
 
+
+    def display(self):
+        curr = self.cabeza
+        while curr:
+            print(curr.valor, end=" -> ")
+            curr = curr.siguiente
+
+
+prueba = LinkedList()
+
+prueba.insertar_ultimo(5)
+prueba.insertar_ultimo(5)
+prueba.insertar_ultimo(5)
+prueba.insertar_ultimo(5)
+prueba.insertar_ultimo(5)
+prueba.display()
                   
 
                       

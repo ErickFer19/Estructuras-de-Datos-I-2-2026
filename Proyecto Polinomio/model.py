@@ -18,7 +18,7 @@ class Polinomio:
         else:
             actual = self.cabeza
             anterior = None
-            while actual is not None:
+            while actual:
                 if actual.exponente == exponente and actual.variable == variable or exponente == 0 and actual.exponente ==0:
                     val_actual = -actual.coeficiente if actual.signo == "-" else actual.coeficiente
                     val_nuevo = -nuevo_polinomio.coeficiente if signo == "-" else nuevo_polinomio.coeficiente
@@ -47,7 +47,7 @@ class Polinomio:
             return
         anterior = None
         actual = self.cabeza
-        while actual is not None:
+        while actual:
             if actual.exponente == exponente:
                 anterior.siguiente = actual.siguiente
                 return
@@ -66,7 +66,7 @@ class Polinomio:
         
         elementos = []
         actual = self.cabeza
-        while actual is not None:
+        while actual:
             if actual.exponente == 0:
                 termino_str = f"{actual.signo} {actual.coeficiente}"
                 elementos.append(termino_str)

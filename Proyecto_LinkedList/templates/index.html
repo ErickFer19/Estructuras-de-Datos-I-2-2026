@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 To-Do List</h1>
+        
+        <form action="/add" method="POST" class="task-form">
+            <input type="text" name="taskTitle" placeholder="Título de la tarea..." required autocomplete="off">
+            <textarea name="taskDesc" placeholder="Agrega una descripción detallada..." autocomplete="off"></textarea>
+            <button type="submit">Agregar Tarea</button>
+        </form>
+
+        <div class="list-section">
+            <h3>Tareas:</h3>
+            <ul>
+                {% for task in tasks %}
+                    <li class="task-node {{ task.estado }}">
+                        <div class="task-content">
+                            <div class="task-title">{{ task.title }}</div>
+                            {% if task.description %}
+                                <div class="task-desc">{{ task.description }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="task-actions">
+                            <a href="/toggle/{{ task.id }}" class="btn-action btn-complete" title="Cambiar estado">
+                                {{ '✔' if task.estado == 'pendiente' else '↩' }}
+                            </a>
+                            <a href="/delete/{{ task.id }}" class="btn-action btn-delete" title="Eliminar tarea">
+                                🗑
+                            </a>
+                        </div>
+                    </li>
+                {% else %}
+                    <div class="empty-state">No hay tareas registradas todavía. ¡Agrega una!</div>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
